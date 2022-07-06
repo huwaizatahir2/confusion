@@ -1,5 +1,6 @@
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap'
+import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap'
 import { useState, useEffect } from 'react'
+import Dishdetail from './DishdetailComponent';
 
 function Menu(props){
 
@@ -9,33 +10,8 @@ function Menu(props){
         setSelectedDish(dish);
     };
     useEffect(() => {
-       console.log("component did mount") 
+       console.log("Menu component did mount") 
     }, []);
-
-    function renderDish(dish){
-        if (dish != null){
-            return (
-                <Card>
-                    <CardImg width="100%" object src={dish.image} alt={dish.name}/>
-                    <CardBody>
-                        <CardTitle>
-                            {dish.name}
-                        </CardTitle>
-                        <CardText>
-                            {dish.description}
-                        </CardText>
-                    </CardBody>
-                </Card>
-            );
-        }
-        else {
-            return (
-                <div>
-
-                </div>
-            );
-        }
-    };
 
     const menu = props.dishes.map( (dish) => {
         return (
@@ -57,9 +33,7 @@ function Menu(props){
             <div className="row">
                 {menu}
             </div>
-            <div className="row">
-                {renderDish(selectedDish)}
-            </div>
+            {selectedDish&&<Dishdetail selectedDish={selectedDish} />}
         </div>
     );
 }
