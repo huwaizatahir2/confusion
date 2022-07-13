@@ -6,7 +6,7 @@ import Dishdetail from './DishdetailComponent';
 
 function Main() {
 
-  const [dishes, setDishes] = useState(DISHES);
+  const [dishes] = useState(DISHES);
   const [selectedDish, setSelectedDish] = useState(null);
 
   function onDishSelect(dishId){
