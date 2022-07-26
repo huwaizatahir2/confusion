@@ -3,22 +3,27 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { useState } from 'react'
 import { DISHES } from '../shared/dishes';
-import Dishdetail from './DishdetailComponent';
+import Home from './HomeComponent';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 function Main() {
 
   const [dishes] = useState(DISHES);
-  const [selectedDish, setSelectedDish] = useState(null);
-
-  function onDishSelect(dishId){
-    setSelectedDish(dishId);
-};
-
+  
   return (
     <div>
       <Header/>
-      <Menu onClick={(dishId) => onDishSelect(dishId)} dishes={dishes} />
-      {selectedDish&&<Dishdetail selectedDish={dishes.filter((dish) => dish.id === selectedDish)[0]}/>}
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home/>} />
+          <Route path='/home' element={<Home/>} />
+          <Route path='/menu' element={<Menu dishes={dishes} />} /> 
+          <Route
+              path="*"
+              element={<Navigate to="/home" replace />}
+          />
+        </Route>
+      </Routes>
       <Footer />
     </div>
   );
